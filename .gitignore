@@ -27,3 +27,5 @@ data_*/
 .vscode/
 .vs/
 .cache/
+
+project/addons/beehave/bin

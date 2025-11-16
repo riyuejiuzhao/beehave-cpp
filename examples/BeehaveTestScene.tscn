@@ -1,18 +1,44 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxkotdttpvmb0"]
+[gd_scene load_steps=18 format=3 uid="uid://dxkotdttpvmb0"]
 
-[ext_resource type="Script" path="res://examples/BeehaveTestScene.gd" id="1_s45or"]
+[ext_resource type="Script" uid="uid://cy2vvjjxyr84v" path="res://examples/BeehaveTestScene.gd" id="1_s45or"]
 [ext_resource type="Texture2D" uid="uid://uq5muso23nn5" path="res://splash.png" id="2_yf6a3"]
-[ext_resource type="Script" path="res://examples/ColorChangingSprite.gd" id="3_4a21r"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="3_hid2l"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="5_3qraw"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5_ifctq"]
+[ext_resource type="Script" uid="uid://becl063hua5iw" path="res://examples/ColorChangingSprite.gd" id="3_4a21r"]
 [ext_resource type="PackedScene" uid="uid://dl8hr0kerrxsv" path="res://examples/conditions/HasPositivePosition.tscn" id="6_7qx5k"]
 [ext_resource type="PackedScene" uid="uid://c3msbcyat8v0n" path="res://examples/actions/SetModulateColor.tscn" id="7_b4xjm"]
 [ext_resource type="PackedScene" uid="uid://dgbwmcsll3o7t" path="res://examples/conditions/HasNegativePosition.tscn" id="8_dorjh"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="9_k8008"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_atdvc"]
 load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="Resource" id="Resource_vvc3b"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_tw6be"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/selector_reactive.gd"
+
+[sub_resource type="Resource" id="Resource_88hec"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_s53si"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_k8u7x"]
+metadata/__load_path__ = "res://addons/beehave/blackboard.gd"
+
+[sub_resource type="Resource" id="Resource_38jxm"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_thkac"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/selector_reactive.gd"
+
+[sub_resource type="Resource" id="Resource_fqrxn"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_hqfjv"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_emdgo"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
 
 [node name="BeehaveTestScene" type="Node2D"]
 script = ExtResource("1_s45or")
@@ -30,15 +56,15 @@ script = ExtResource("3_4a21r")
 
 [node name="BeehaveTree" type="Node" parent="ColorChangingSprite" node_paths=PackedStringArray("blackboard")]
 unique_name_in_owner = true
-script = ExtResource("3_hid2l")
+script = SubResource("Resource_vvc3b")
 blackboard = NodePath("../../Blackboard")
 custom_monitor = true
 
 [node name="SelectorComposite" type="Node" parent="ColorChangingSprite/BeehaveTree"]
-script = ExtResource("5_3qraw")
+script = SubResource("Resource_tw6be")
 
 [node name="SequenceComposite" type="Node" parent="ColorChangingSprite/BeehaveTree/SelectorComposite"]
-script = ExtResource("5_ifctq")
+script = SubResource("Resource_88hec")
 
 [node name="HasPositivePosition" parent="ColorChangingSprite/BeehaveTree/SelectorComposite/SequenceComposite" instance=ExtResource("6_7qx5k")]
 
@@ -46,7 +72,7 @@ script = ExtResource("5_ifctq")
 modulate_color = Color(1, 0, 0, 1)
 
 [node name="SequenceComposite2" type="Node" parent="ColorChangingSprite/BeehaveTree/SelectorComposite"]
-script = ExtResource("5_ifctq")
+script = SubResource("Resource_s53si")
 
 [node name="HasNegativePosition" parent="ColorChangingSprite/BeehaveTree/SelectorComposite/SequenceComposite2" instance=ExtResource("8_dorjh")]
 
@@ -58,7 +84,7 @@ modulate_color = Color(0, 0, 1, 1)
 [node name="Camera2D" type="Camera2D" parent="ColorChangingSprite"]
 
 [node name="Blackboard" type="Node" parent="."]
-script = ExtResource("9_k8008")
+script = SubResource("Resource_k8u7x")
 
 [node name="AnotherSprite" type="Sprite2D" parent="."]
 position = Vector2(182, 180)
@@ -66,15 +92,15 @@ scale = Vector2(0.1, 0.1)
 texture = SubResource("CompressedTexture2D_atdvc")
 
 [node name="AnotherTree" type="Node" parent="AnotherSprite" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("3_hid2l")
+script = SubResource("Resource_38jxm")
 blackboard = NodePath("../../Blackboard")
 custom_monitor = null
 
 [node name="SelectorComposite" type="Node" parent="AnotherSprite/AnotherTree"]
-script = ExtResource("5_3qraw")
+script = SubResource("Resource_thkac")
 
 [node name="SequenceComposite" type="Node" parent="AnotherSprite/AnotherTree/SelectorComposite"]
-script = ExtResource("5_ifctq")
+script = SubResource("Resource_fqrxn")
 
 [node name="HasPositivePosition" parent="AnotherSprite/AnotherTree/SelectorComposite/SequenceComposite" instance=ExtResource("6_7qx5k")]
 
@@ -82,7 +108,7 @@ script = ExtResource("5_ifctq")
 modulate_color = Color(1, 0, 0, 1)
 
 [node name="SequenceComposite2" type="Node" parent="AnotherSprite/AnotherTree/SelectorComposite"]
-script = ExtResource("5_ifctq")
+script = SubResource("Resource_hqfjv")
 
 [node name="HasNegativePosition" parent="AnotherSprite/AnotherTree/SelectorComposite/SequenceComposite2" instance=ExtResource("8_dorjh")]
 
@@ -90,7 +116,7 @@ script = ExtResource("5_ifctq")
 modulate_color = Color(0, 0, 1, 1)
 
 [node name="SequenceComposite2" type="Node" parent="AnotherSprite/AnotherTree/SelectorComposite/SequenceComposite2"]
-script = ExtResource("5_ifctq")
+script = SubResource("Resource_emdgo")
 
 [node name="HasNegativePosition" parent="AnotherSprite/AnotherTree/SelectorComposite/SequenceComposite2/SequenceComposite2" instance=ExtResource("8_dorjh")]
 

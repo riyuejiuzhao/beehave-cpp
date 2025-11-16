@@ -1,31 +1,66 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=17 format=3 uid="uid://bmwvwvp6l4svf"]
 
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="1_27ukk"]
-[ext_resource type="Script" path="res://test/UnitTestScene.gd" id="1_embiv"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_phgmn"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="4_px6t4"]
-[ext_resource type="Script" path="res://test/conditions/value_reached_condition.gd" id="5_rc0ra"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="5_thhls"]
-[ext_resource type="Script" path="res://test/actions/count_up_action.gd" id="6_brhwp"]
+[ext_resource type="Script" uid="uid://bxjkkvlkcw4b1" path="res://test/UnitTestScene.gd" id="1_embiv"]
+[ext_resource type="Script" uid="uid://5srlhheum0or" path="res://test/conditions/value_reached_condition.gd" id="5_rc0ra"]
+[ext_resource type="Script" uid="uid://cikq5w6ik354y" path="res://test/actions/count_up_action.gd" id="6_brhwp"]
+
+[sub_resource type="Resource" id="Resource_m4l6u"]
+metadata/__load_path__ = "res://addons/beehave/blackboard.gd"
+
+[sub_resource type="Resource" id="Resource_prlgi"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_oibd8"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_gtm4q"]
+metadata/__load_path__ = "res://addons/beehave/nodes/decorators/inverter.gd"
+
+[sub_resource type="Resource" id="Resource_oaclp"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_sgmp2"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_e055i"]
+metadata/__load_path__ = "res://addons/beehave/nodes/decorators/inverter.gd"
+
+[sub_resource type="Resource" id="Resource_cqucq"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_qloxj"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence.gd"
+
+[sub_resource type="Resource" id="Resource_853sc"]
+metadata/__load_path__ = "res://addons/beehave/nodes/decorators/inverter.gd"
+
+[sub_resource type="Resource" id="Resource_xxyq6"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_w05kh"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_lud1u"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
 
 [node name="UnitTestScene" type="Node2D"]
 script = ExtResource("1_embiv")
 
 [node name="Blackboard" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_27ukk")
+script = SubResource("Resource_m4l6u")
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="Node2D"]
 unique_name_in_owner = true
-script = ExtResource("2_phgmn")
+script = SubResource("Resource_prlgi")
 
 [node name="SequenceComposite" type="Node" parent="Node2D/BeehaveTree"]
-script = ExtResource("4_px6t4")
+script = SubResource("Resource_oibd8")
 
 [node name="ValueNotReached" type="Node" parent="Node2D/BeehaveTree/SequenceComposite"]
-script = ExtResource("5_thhls")
+script = SubResource("Resource_gtm4q")
 
 [node name="ValueReachedCondition" type="Node" parent="Node2D/BeehaveTree/SequenceComposite/ValueNotReached"]
 script = ExtResource("5_rc0ra")
@@ -37,15 +72,15 @@ script = ExtResource("6_brhwp")
 [node name="AnotherNode" type="Node2D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="AnotherNode" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("2_phgmn")
+script = SubResource("Resource_oaclp")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../../Blackboard")
 
 [node name="SequenceComposite" type="Node" parent="AnotherNode/BeehaveTree"]
-script = ExtResource("4_px6t4")
+script = SubResource("Resource_sgmp2")
 
 [node name="ValueNotReached" type="Node" parent="AnotherNode/BeehaveTree/SequenceComposite"]
-script = ExtResource("5_thhls")
+script = SubResource("Resource_e055i")
 
 [node name="ValueReachedCondition" type="Node" parent="AnotherNode/BeehaveTree/SequenceComposite/ValueNotReached"]
 script = ExtResource("5_rc0ra")
@@ -58,15 +93,15 @@ script = ExtResource("6_brhwp")
 [node name="ThirdNode" type="Node2D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="ThirdNode" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("2_phgmn")
+script = SubResource("Resource_cqucq")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../../Blackboard")
 
 [node name="SequenceComposite" type="Node" parent="ThirdNode/BeehaveTree"]
-script = ExtResource("4_px6t4")
+script = SubResource("Resource_qloxj")
 
 [node name="ValueNotReached" type="Node" parent="ThirdNode/BeehaveTree/SequenceComposite"]
-script = ExtResource("5_thhls")
+script = SubResource("Resource_853sc")
 
 [node name="ValueReachedCondition" type="Node" parent="ThirdNode/BeehaveTree/SequenceComposite/ValueNotReached"]
 script = ExtResource("5_rc0ra")
@@ -79,13 +114,13 @@ script = ExtResource("6_brhwp")
 [node name="EmptyTree" type="Node2D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="EmptyTree" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("2_phgmn")
+script = SubResource("Resource_xxyq6")
 blackboard = NodePath("")
 
 [node name="OnlyOneActionTree" type="Node2D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="OnlyOneActionTree" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("2_phgmn")
+script = SubResource("Resource_w05kh")
 enabled = false
 actor_node_path = NodePath("..")
 blackboard = NodePath("")
@@ -96,7 +131,7 @@ script = ExtResource("6_brhwp")
 [node name="DeactivatedTree" type="Node2D" parent="."]
 
 [node name="BeehaveTree" type="Node" parent="DeactivatedTree" node_paths=PackedStringArray("blackboard")]
-script = ExtResource("2_phgmn")
+script = SubResource("Resource_lud1u")
 actor_node_path = NodePath("..")
 blackboard = NodePath("")
 

@@ -1,19 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhhw4ej2jbyha"]
 
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_10c1m"]
-[ext_resource type="Script" path="res://test/randomized_composites/runtime_changes/RuntimeChangesTestScene.gd" id="1_folsk"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_random.gd" id="2_k8ytk"]
-[ext_resource type="Script" path="res://test/actions/mock_action.gd" id="3_kqvkq"]
+[ext_resource type="Script" uid="uid://dsnff6d4k57e7" path="res://test/randomized_composites/runtime_changes/RuntimeChangesTestScene.gd" id="1_folsk"]
+[ext_resource type="Script" uid="uid://b7qdmo8knoohl" path="res://test/actions/mock_action.gd" id="3_kqvkq"]
+
+[sub_resource type="Resource" id="Resource_cbcdg"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_ljbx7"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/sequence_random.gd"
 
 [node name="RuntimeChangesTestScene" type="Node2D"]
 script = ExtResource("1_folsk")
 
 [node name="BeehaveTree" type="Node" parent="."]
-script = ExtResource("1_10c1m")
+script = SubResource("Resource_cbcdg")
 
 [node name="SequenceRandom" type="Node" parent="BeehaveTree"]
 unique_name_in_owner = true
-script = ExtResource("2_k8ytk")
+script = SubResource("Resource_ljbx7")
 random_seed = 12345
 use_weights = true
 Weights/Idle = 1

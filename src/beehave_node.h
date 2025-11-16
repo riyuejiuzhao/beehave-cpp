@@ -22,10 +22,6 @@ namespace godot {
         int tick(Node *actor, Blackboard *blackboard);
         void after_run(Node *actor, Blackboard *blackboard);
         TypedArray<StringName> get_class_name();
-        virtual void _before_run(Node *actor, Blackboard *blackboard);
-        virtual int _tick(Node *actor, Blackboard *blackboard);
-        virtual void _after_run(Node *actor, Blackboard *blackboard);
-        virtual TypedArray<StringName> _get_class_name();
     private:
         TypedArray<StringName> class_names;
     protected:

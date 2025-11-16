@@ -33,33 +33,11 @@ TypedArray<StringName> BeehaveNode::get_class_name() {
     return call("_get_class_name");
 }
 
-void BeehaveNode::_before_run(Node *actor, Blackboard *blackboard) {
-    
-}
-
-int BeehaveNode::_tick(Node *actor, Blackboard *blackboard) {
-    return BeehaveTreeStatus::SUCCESS;
-}
-
-void BeehaveNode::_after_run(Node *actor, Blackboard *blackboard) {
-
-}
-
-TypedArray<StringName> BeehaveNode::_get_class_name() {
-    class_names.push_back("BeehaveNode");
-    return class_names;
-}
-
 void BeehaveNode::_bind_methods() {
     ClassDB::bind_method(D_METHOD("before_run", "actor", "blackboard"), &BeehaveNode::before_run);
     ClassDB::bind_method(D_METHOD("tick", "actor", "blackboard"), &BeehaveNode::tick);
     ClassDB::bind_method(D_METHOD("after_run", "actor", "blackboard"), &BeehaveNode::after_run);
     ClassDB::bind_method(D_METHOD("get_class_name"), &BeehaveNode::get_class_name);
-
-    BIND_VIRTUAL_METHOD(BeehaveNode, _before_run);
-    BIND_VIRTUAL_METHOD(BeehaveNode, _tick);
-    BIND_VIRTUAL_METHOD(BeehaveNode, _after_run);
-    BIND_VIRTUAL_METHOD(BeehaveNode, _get_class_name);
 
     BIND_ENUM_CONSTANT(SUCCESS);
     BIND_ENUM_CONSTANT(FAILURE);

@@ -1,10 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://0fdjf2domei1"]
 
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_o8soi"]
-[ext_resource type="Script" path="res://test/randomized_composites/weighted_sampling/selector_random/selector_random_weights.gd" id="1_qo3xr"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="2_8j410"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_random.gd" id="2_sx3ne"]
-[ext_resource type="Script" path="res://test/actions/count_up_action.gd" id="5_n64nd"]
+[ext_resource type="Script" uid="uid://cfa5usp2cx5pr" path="res://test/randomized_composites/weighted_sampling/selector_random/selector_random_weights.gd" id="1_qo3xr"]
+[ext_resource type="Script" uid="uid://cikq5w6ik354y" path="res://test/actions/count_up_action.gd" id="5_n64nd"]
+
+[sub_resource type="Resource" id="Resource_ugywa"]
+metadata/__load_path__ = "res://addons/beehave/blackboard.gd"
+
+[sub_resource type="Resource" id="Resource_62e2b"]
+metadata/__load_path__ = "res://addons/beehave/nodes/beehave_tree.gd"
+
+[sub_resource type="Resource" id="Resource_anmwb"]
+metadata/__load_path__ = "res://addons/beehave/nodes/composites/selector_random.gd"
 
 [node name="SelectorRandomWeights" type="Node2D"]
 script = ExtResource("1_qo3xr")
@@ -14,16 +20,16 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Blackboard" type="Node" parent="."]
-script = ExtResource("2_8j410")
+script = SubResource("Resource_ugywa")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
-script = ExtResource("1_o8soi")
+script = SubResource("Resource_62e2b")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../Blackboard")
 
 [node name="SelectorRandom" type="Node" parent="BeehaveTree"]
 unique_name_in_owner = true
-script = ExtResource("2_sx3ne")
+script = SubResource("Resource_anmwb")
 random_seed = 12345
 use_weights = true
 Weights/Common = 1
