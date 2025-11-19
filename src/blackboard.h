@@ -1,10 +1,8 @@
 #ifndef BLACKBOARD_H
 #define BLACKBOARD_H
 
-#include "godot_cpp/variant/dictionary.hpp"
-#include "godot_cpp/variant/node_path.hpp"
-#include "godot_cpp/variant/variant.hpp"
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/variant/string.hpp>
 
 namespace godot {
 
@@ -14,13 +12,16 @@ namespace godot {
     public:
         Blackboard();
         ~Blackboard();
-        void set_data(Dictionary p_data);
-        Dictionary get_data() const {return data;}
 
-        void set_value(Variant p_key, Variant p_value);
-        Variant get_value(Variant p_key, Variant default_value = 0);
-        bool has_value(Variant p_key);
-        void erase_entry(Variant p_key);
+        TypedArray<String> keys();
+        
+        void set_data(const Dictionary &p_data);
+        const Dictionary &get_data() const {return data;}
+
+        void set_value(const String &p_key, const Variant &p_value);
+        Variant get_value(const String &p_key, const Variant &default_value = Variant());
+        bool has_value(const String &p_key);
+        void erase_entry(const String &p_key);
     private:
         Dictionary data;
     protected:
