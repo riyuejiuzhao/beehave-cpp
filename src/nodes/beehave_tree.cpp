@@ -295,11 +295,11 @@ int BeehaveTree::tick()
     Blackboard *bb = get_blackboard();
     bb->set_value("can_send_message", _can_send_message);
 
-    if (_can_send_message && !Engine::get_singleton()->is_editor_hint())
-    {
-        GD_LOG_INFO("process_begin, instance_id={0}, blackboard={1}", 
-            get_instance_id(), bb->get_debug_data());
-    }
+    // if (_can_send_message && !Engine::get_singleton()->is_editor_hint())
+    // {
+    //     GD_LOG_INFO("process_begin, instance_id={0}, blackboard={1}", 
+    //         get_instance_id(), bb->get_debug_data());
+    // }
 
     if (actor == nullptr || get_child_count() == 0)
     {
@@ -319,11 +319,11 @@ int BeehaveTree::tick()
 
     status = child->safe_tick(actor, bb);
 
-    if (_can_send_message)
-    {
-        GD_LOG_INFO("process_tick, child_id={0}, instance_id={1}, status={2}, blackboard_data={3}",
-                    child->get_instance_id(), get_instance_id(), status, bb->get_debug_data());
-    }
+    // if (_can_send_message)
+    // {
+    //     GD_LOG_INFO("process_tick, child_id={0}, instance_id={1}, status={2}, blackboard_data={3}",
+    //                 child->get_instance_id(), get_instance_id(), status, bb->get_debug_data());
+    // }
 
     // Clear running action if nothing is running
     if (status != BeehaveNode::RUNNING)
@@ -332,10 +332,10 @@ int BeehaveTree::tick()
         child->after_run(actor, bb);
     }
 
-    if (_can_send_message && !Engine::get_singleton()->is_editor_hint())
-    {
-        GD_LOG_INFO("process_end, instance_id={0}, blackboard={1}", get_instance_id(), bb->get_debug_data());
-    }
+    // if (_can_send_message && !Engine::get_singleton()->is_editor_hint())
+    // {
+    //     GD_LOG_INFO("process_end, instance_id={0}, blackboard={1}", get_instance_id(), bb->get_debug_data());
+    // }
 
     // Check the cost for this frame and save it for metric report
     _process_time_metric_value = Time::get_singleton()->get_ticks_usec() - start_time;

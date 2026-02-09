@@ -28,9 +28,9 @@ int SequenceComposite::tick(Node *actor, Blackboard *blackboard)
             child->before_run(actor, blackboard);
 
         int response = child->safe_tick(actor, blackboard);
-        if (can_send_message(blackboard))
-            GD_LOG_INFO("Actor ID={0}, Child Index={1}, Response={2} Blackboard={3}",
-                        actor->get_instance_id(), child->get_index(), response, blackboard->get_debug_data());
+        // if (can_send_message(blackboard))
+        //     GD_LOG_INFO("Actor ID={0}, Child Index={1}, Response={2} Blackboard={3}",
+        //                 actor->get_instance_id(), child->get_index(), response, blackboard->get_debug_data());
 
         ConditionLeaf *condition = Object::cast_to<ConditionLeaf>(child);
         if (condition != nullptr)

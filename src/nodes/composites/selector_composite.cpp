@@ -43,9 +43,9 @@ int SelectorComposite::tick(Node *actor, Blackboard *blackboard)
         int response = child->safe_tick(actor, blackboard);
         processed_count++;
 
-        if (can_send_message(blackboard))
-            GD_LOG_INFO("Actor ID {0}, Child Index {1}, Response {2}",
-                        actor->get_instance_id(), child->get_index(), response);
+        // if (can_send_message(blackboard))
+        //     GD_LOG_INFO("Actor ID {0}, Child Index {1}, Response {2}",
+        //                 actor->get_instance_id(), child->get_index(), response);
 
         ConditionLeaf *condition = Object::cast_to<ConditionLeaf>(child);
         if (condition != nullptr)
