@@ -90,7 +90,6 @@ namespace godot
         int last_tick;
 
         // Internal
-        Blackboard *_internal_blackboard;
         String _process_time_metric_name;
         double _process_time_metric_value;
         bool _can_send_message;

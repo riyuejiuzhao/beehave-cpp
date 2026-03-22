@@ -29,7 +29,6 @@ BeehaveTree::BeehaveTree()
     actor = nullptr;
     status = -1;
     last_tick = -1;
-    _internal_blackboard = nullptr;
     _process_time_metric_value = 0.0;
     _can_send_message = false;
 }
@@ -89,28 +88,11 @@ void BeehaveTree::set_process_thread(ProcessThread p_thread)
 void BeehaveTree::set_blackboard(Blackboard *p_blackboard)
 {
     blackboard = p_blackboard;
-
-    if (blackboard && _internal_blackboard)
-    {
-        remove_child(_internal_blackboard);
-        _internal_blackboard->queue_free();
-        _internal_blackboard = nullptr;
-    }
-    else if (!blackboard && !_internal_blackboard)
-    {
-        _internal_blackboard = memnew(Blackboard);
-        add_child(_internal_blackboard, false, Node::INTERNAL_MODE_BACK);
-    }
 }
 
 Blackboard *BeehaveTree::get_blackboard()
 {
-    if (!blackboard && !_internal_blackboard)
-    {
-        _internal_blackboard = memnew(Blackboard);
-        add_child(_internal_blackboard, false, Node::INTERNAL_MODE_BACK);
-    }
-    return blackboard ? blackboard : _internal_blackboard;
+    return blackboard;
 }
 
 void BeehaveTree::set_custom_monitor(bool p_enabled)
@@ -196,11 +178,6 @@ void BeehaveTree::_ready()
         {
             actor = get_parent();
         }
-    }
-
-    if (!blackboard)
-    {
-        set_blackboard(nullptr); // Trigger internal blackboard creation
     }
 
     // Setup metric name
@@ -346,6 +323,11 @@ int BeehaveTree::tick()
 PackedStringArray BeehaveTree::_get_configuration_warnings() const
 {
     PackedStringArray warnings;
+
+    if (blackboard == nullptr)
+    {
+        warnings.push_back("Blackboard is not assigned. Please assign a Blackboard node.");
+    }
 
     if (actor == nullptr)
     {
