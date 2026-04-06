@@ -270,7 +270,7 @@ int BeehaveTree::tick()
     uint64_t start_time = Time::get_singleton()->get_ticks_usec();
 
     Blackboard *bb = get_blackboard();
-    bb->set_value("can_send_message", _can_send_message);
+    bb->set_can_send_message(_can_send_message);
 
     // if (_can_send_message && !Engine::get_singleton()->is_editor_hint())
     // {
@@ -296,16 +296,10 @@ int BeehaveTree::tick()
 
     status = child->safe_tick(actor, bb);
 
-    // if (_can_send_message)
-    // {
-    //     GD_LOG_INFO("process_tick, child_id={0}, instance_id={1}, status={2}, blackboard_data={3}",
-    //                 child->get_instance_id(), get_instance_id(), status, bb->get_debug_data());
-    // }
-
     // Clear running action if nothing is running
     if (status != BeehaveNode::RUNNING)
     {
-        bb->set_value("running_action", Variant(), itos(actor->get_instance_id()));
+        bb->set_running_action(nullptr, itos(actor->get_instance_id()));
         child->after_run(actor, bb);
     }
 
@@ -358,8 +352,7 @@ ActionLeaf *BeehaveTree::get_running_action()
     Blackboard *bb = get_blackboard();
     if (actor)
     {
-        Variant value = bb->get_value("running_action", Variant(), itos(actor->get_instance_id()));
-        return Object::cast_to<ActionLeaf>(value);
+        return bb->get_running_action(itos(actor->get_instance_id()));
     }
     return nullptr;
 }
@@ -369,8 +362,7 @@ ConditionLeaf *BeehaveTree::get_last_condition()
     Blackboard *bb = get_blackboard();
     if (actor)
     {
-        Variant value = bb->get_value("last_condition", Variant(), itos(actor->get_instance_id()));
-        return Object::cast_to<ConditionLeaf>(value);
+        return bb->get_last_condition(itos(actor->get_instance_id()));
     }
     return nullptr;
 }
@@ -378,9 +370,9 @@ ConditionLeaf *BeehaveTree::get_last_condition()
 String BeehaveTree::get_last_condition_status()
 {
     Blackboard *bb = get_blackboard();
-    if (actor && bb->has_value("last_condition_status", itos(actor->get_instance_id())))
+    if (actor)
     {
-        int cond_status = bb->get_value("last_condition_status", Variant(), itos(actor->get_instance_id()));
+        int cond_status = bb->get_last_condition_status(-1, itos(actor->get_instance_id()));
         if (cond_status == BeehaveNode::SUCCESS)
         {
             return "SUCCESS";

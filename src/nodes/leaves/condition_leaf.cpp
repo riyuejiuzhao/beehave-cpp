@@ -21,3 +21,8 @@ TypedArray<StringName> ConditionLeaf::get_class_name() const
 void ConditionLeaf::_bind_methods()
 {
 }
+
+void ConditionLeaf::after_tick(Node *actor, Blackboard *blackboard, int response)
+{
+    blackboard->set_last_condition_result(this, response, String::num_int64(actor->get_instance_id()));
+}

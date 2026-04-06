@@ -17,6 +17,7 @@ namespace godot
 
     protected:
         static void _bind_methods();
+        void after_tick(Node *actor, Blackboard *blackboard, int response) override;
     };
 
 }

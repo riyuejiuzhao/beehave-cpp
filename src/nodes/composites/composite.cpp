@@ -1,4 +1,5 @@
 #include "composite.hpp"
+#include "../leaves/action_leaf.hpp"
 #include "../../util.hpp"
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/classes/engine.hpp>
@@ -57,9 +58,9 @@ void Composite::_cleanup_running(Node *child, Node *actor, Blackboard *blackboar
 
     running_child = nullptr;
     String id = String::num_int64(actor->get_instance_id());
-    Node *running_action = Object::cast_to<Node>(blackboard->get_value("running_action", Variant(), id));
+    ActionLeaf *running_action = blackboard->get_running_action(id);
     if (child == running_action)
-        blackboard->set_value("running_action", Variant(), id);
+        blackboard->set_running_action(nullptr, id);
 }
 
 void Composite::_interrupt_children(Node *actor, Blackboard *blackboard, int from_index, int last_index)

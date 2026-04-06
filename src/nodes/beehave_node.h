@@ -38,8 +38,9 @@ namespace godot
     protected:
         static void _bind_methods();
         virtual int tick(Node *actor, Blackboard *blackboard);
+        virtual void after_tick(Node *actor, Blackboard *blackboard, int response);
 
-        GDVIRTUAL3R(int, _tick, Node *, Blackboard *, int);
+        GDVIRTUAL2R(int, _tick, Node *, Blackboard *);
     };
 
 }

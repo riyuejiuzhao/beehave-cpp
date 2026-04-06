@@ -22,7 +22,7 @@ void BeehaveNode::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_class_name"), &BeehaveNode::get_class_name);
     ClassDB::bind_method(D_METHOD("can_send_message", "blackboard"), &BeehaveNode::can_send_message);
 
-    GDVIRTUAL_BIND(_tick, "actor", "blackboard", "tick_result");
+    GDVIRTUAL_BIND(_tick, "actor", "blackboard");
 
     BIND_ENUM_CONSTANT(SUCCESS);
     BIND_ENUM_CONSTANT(FAILURE);
@@ -48,8 +48,12 @@ int BeehaveNode::tick(Node* actor, Blackboard* blackboard) {
 
 int BeehaveNode::safe_tick(Node* actor, Blackboard* blackboard) {
     int response = tick(actor, blackboard);
-    GDVIRTUAL_CALL(_tick, actor, blackboard, response, response);
+    GDVIRTUAL_CALL(_tick, actor, blackboard, response);
+    after_tick(actor, blackboard, response);
     return response;
+}
+
+void BeehaveNode::after_tick(Node *actor, Blackboard *blackboard, int response) {
 }
 
 void BeehaveNode::interrupt(Node* actor, Blackboard* blackboard) {
@@ -70,7 +74,6 @@ TypedArray<StringName> BeehaveNode::get_class_name() const {
 }
 
 bool BeehaveNode::can_send_message(Blackboard* blackboard) {
-    return blackboard->get_value("can_send_message", false);
+    return blackboard->get_can_send_message();
 }
-
 

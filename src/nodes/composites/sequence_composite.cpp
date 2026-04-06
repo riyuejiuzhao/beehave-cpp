@@ -1,6 +1,5 @@
 #include "sequence_composite.hpp"
 #include "../leaves/action_leaf.hpp"
-#include "../leaves/condition_leaf.hpp"
 #include "../../debug/debugger_messages.h"
 #include <godot_cpp/core/class_db.hpp>
 
@@ -28,18 +27,6 @@ int SequenceComposite::tick(Node *actor, Blackboard *blackboard)
             child->before_run(actor, blackboard);
 
         int response = child->safe_tick(actor, blackboard);
-        // if (can_send_message(blackboard))
-        //     GD_LOG_INFO("Actor ID={0}, Child Index={1}, Response={2} Blackboard={3}",
-        //                 actor->get_instance_id(), child->get_index(), response, blackboard->get_debug_data());
-
-        ConditionLeaf *condition = Object::cast_to<ConditionLeaf>(child);
-        if (condition != nullptr)
-        {
-            String id = String::num_int64(actor->get_instance_id());
-            blackboard->set_value("last_condition", child, id);
-            blackboard->set_value("last_condition_status", response, id);
-        }
-
         switch (response)
         {
         case SUCCESS:
@@ -85,7 +72,7 @@ int SequenceComposite::tick(Node *actor, Blackboard *blackboard)
             if (action != nullptr)
             {
                 String id = String::num_int64(actor->get_instance_id());
-                blackboard->set_value("running_action", child, id);
+                blackboard->set_running_action(action, id);
             }
             _interrupt_children(actor, blackboard, i, previous_failure_or_running_index);
             previous_failure_or_running_index = i;
