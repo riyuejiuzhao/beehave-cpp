@@ -57,8 +57,6 @@ void BeehaveNode::after_tick(Node *actor, Blackboard *blackboard, int response) 
 }
 
 void BeehaveNode::interrupt(Node* actor, Blackboard* blackboard) {
-    GD_LOG_INFO("BeehaveNode interrupt, instance_id={0}, blackboard={1}",
-        get_instance_id(), blackboard->get_debug_data());
 }
 
 void BeehaveNode::before_run(Node* actor, Blackboard* blackboard) {
